@@ -23,13 +23,13 @@ find_package(FLEX REQUIRED)
 # AT&T Yacc, Berkeley Yacc, or GNU Bison.  We've tested with bison.
 find_package(BISON REQUIRED)
 
-set(SRCS table.c table.h util.c util.h main.c)
+set(SRCS src/table.c include/table.h src/util.c include/util.h src/main.c)
 
-flex_target(lexer lexer.l ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.c)
-bison_target(parser parser.y ${CMAKE_CURRENT_BINARY_DIR}/y.tab.c COMPILE_FLAGS -y)
+flex_target(lexer src/lexer.l ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.c)
+bison_target(parser src/parser.y ${CMAKE_CURRENT_BINARY_DIR}/y.tab.c COMPILE_FLAGS -y)
 
 add_executable(${PROJECT_NAME} ${SRCS} ${FLEX_lexer_OUTPUTS} ${BISON_parser_OUTPUTS})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # for a lex other than GNU Flex, we must link with the -ll library.
 target_link_libraries(${PROJECT_NAME} l)
