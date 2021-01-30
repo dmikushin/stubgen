@@ -225,7 +225,7 @@ int tokens_seen;    /* set to 0        at beginning of each file */
                            * it.  This lets us have more informative
                            * error messages.  See yyerror() in parser.y
                            */
-                          strncpy(linebuf, yytext+1, 1024);
+                          strncpy(linebuf, yytext+1, 1023);
 			  lineno++;
 			  column = 0;
 			  yyless(1); /* give back everything but \n */

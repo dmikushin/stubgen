@@ -430,7 +430,7 @@ static char *sg_getfullname(const char *login)
 	if (pw == NULL) {
 	    fullname = "nobody";
 	} else {
-	    strncpy(fullname_buffer, pw->pw_gecos, 256);
+	    strncpy(fullname_buffer, pw->pw_gecos, 255);
 	    comma = strchr(fullname_buffer, ',');
 	    if (comma) *comma = '\0';
 	    fullname = fullname_buffer;
